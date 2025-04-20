@@ -52,54 +52,81 @@ TF-Canary is a robust CAN-bus simulation platform supporting GUI and CLI. It int
 ## 4. Module Descriptions
 
 ### 4.1 PlatformDetector
-Detects operating system and hardware to configure the environment accordingly.
+
+```markdown
+@include "docs/descriptions/C01-27-tf-canary-plattformDetector.md"
+```
 
 ### 4.2 VenvSetup
-Creates a Python virtual environment ensuring dependency consistency.
+
+```markdown
+@include "docs/descriptions/C01-28-tf-canary-venv-setup.md"
+```
 
 ### 4.3 PixiEnvironment
-Manages cross-platform dependencies for the application.
+
+```markdown
+@include "docs/descriptions/C01-29-tf-canary-pixi-environment.md"
+```
 
 ### 4.4 LoggingSystem
-Centralized logging framework providing structured and persistent logs.
 
-### 4.5 CLI
-Facilitates command-line operations and modular testing.
+```markdown
+@include "docs/descriptions/C01-30-tf-canary-LoggingSystem.md
+```
+
+### 4.5 cli
+
+```markdown
+@include "docs/descriptions/C01-31-tf-canary-cli.md
+``` 
 
 ### 4.6 ConfigurationManager
+
 Loads and manages configurations via environment variables and files.
 
 ### 4.7 SQLiteDB
+
 Persistent storage solution offering CRUD operations for scenarios and settings.
 
 ### 4.8 ScenarioLoader
+
 Fetches and prepares scenarios from the SQLite database.
 
 ### 4.9 ScenarioValidator
+
 Ensures scenario data integrity and correctness before execution.
 
 ### 4.10 ScenarioManager
+
 Controls the lifecycle and execution of scenarios.
 
 ### 4.11 CarSimulator
+
 Simulates vehicle dynamics and responses to CAN messages.
 
 ### 4.12 CANInterfaceFactory
+
 Selects and initializes appropriate CAN interfaces (virtual or hardware).
 
 ### 4.13 VirtualCANInterface
+
 Provides simulated CAN-bus interactions for testing purposes.
 
 ### 4.14 HardwareCANInterface
+
 Interfaces with physical CAN-bus hardware devices.
 
 ### 4.15 CANManager
+
 Manages CAN data flows between interfaces, simulation, and visualization.
 
 ### 4.16 CANVisualizer
+
 Displays real-time CAN-bus data in graphical form.
 
 ### 4.17 MainWindow
+
 Central GUI container integrating all visual and interactive components.
 
 ## 5. Data Model Documentation (C01-22-tf-canary-data-model-documentation)
@@ -123,11 +150,13 @@ Central GUI container integrating all visual and interactive components.
 ## 8. Additional Documentation
 
 ### Makefile (C01-24-tf-canary-makefile)
+
 ```makefile
 @include "docs/descriptions/C01-24-tf-canary-makefile.mk"
 ```
 
 ### Pixi.toml (C01-25-tf-canary-pixi.toml)
+
 ```toml
 @include "docs/descriptions/C01-25-tf-canary-pixi.toml"
 ```
@@ -135,36 +164,43 @@ Central GUI container integrating all visual and interactive components.
 ## 9. Diagrams
 
 ### Dependency Development Chart (c01-13)
+
 ```plantuml
 @include "docs/diagrams/architecture/c01-13_Dependency_Development_Chart.puml"
 ```
 
 ### Context Diagram (c01-15)
+
 ```plantuml
 @include "docs/diagrams/architecture/c01-15 context diagram.puml"
 ```
 
 ### Component Diagram (c01-16)
+
 ```plantuml
 @include "docs/diagrams/architecture/c01-16 component diagram.puml"
 ```
 
 ### Sequence Diagram: Initialization (c01-17)
+
 ```plantuml
 @include "docs/diagrams/architecture/c01-17 sequenz initialisation.puml"
 ```
 
 ### Deployment Diagram (c01-18)
+
 ```plantuml
 @include "docs/diagrams/architecture/c01-18 deployment diagram.puml"
 ```
 
 ### Architecture Diagram (c01-19)
+
 ```plantuml
 @include "docs/diagrams/architecture/c01-19_architecture_diagram_puml"
 ```
 
 ### Sequence Diagram: CAN Message Flow (c01-20)
+
 ```plantuml
 @include "docs/diagrams/architecture/c01-20_CAN_Message_Flow.puml"
 ```
