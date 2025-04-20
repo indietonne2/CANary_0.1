@@ -1,0 +1,16 @@
+@startuml DeploymentDiagram
+node Host {
+  folder "venv/"
+  component "TF-Canary App"
+  database "SQLiteDB File"
+}
+node RaspberryPi {
+  component "CAN Hardware Hat"
+}
+node PC {
+  component "USB-CAN Adapter"
+}
+
+Host --> RaspberryPi : CAN Bus
+Host --> PC : USB-CAN
+@enduml
