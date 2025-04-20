@@ -1,0 +1,18 @@
+@startuml InitSequence
+participant PD as PlatformDetector
+participant VS as VenvSetup
+participant PX as PixiEnvironment
+participant CM as ConfigurationManager
+participant DB as SQLiteDB
+participant SL as ScenarioLoader
+participant SM as ScenarioManager
+participant MW as MainWindow
+
+PD -> VS : init venv
+VS -> PX : configure Pixi
+PX -> CM : load configs
+CM -> DB : init schema
+DB -> SL : register scenarios
+SL -> SM : load default
+SM -> MW : initialize GUI
+@enduml
