@@ -1,22 +1,24 @@
-@startuml ContextDiagram
+@startuml C01-20_ContextDiagram
 actor User
-node "c01-15 TF-Canary Application" {
+node "TF-Canary Application" {
   component MainWindow
   component CANManager
   component ScenarioManager
   component CarSimulator
+  component CLI
+  component LoggingSystem
 }
 database "SQLiteDB"
 actor CANHardware
 actor VirtualCAN
 
-User --> MainWindow : start / interact
+User --> MainWindow : interact
+User --> CLI : execute commands
 MainWindow --> ScenarioManager : select scenario
 ScenarioManager --> SQLiteDB : load scenario
-ScenarioManager --> CANManager : trigger messages
-CANManager --> CarSimulator : send inputs
-CarSimulator --> CANManager : simulate outputs
-CANManager --> CANHardware : send to hardware
-CANManager --> VirtualCAN : send to virtual
-CANManager --> CANVisualizer : update GUI
-@enduml
+ScenarioManager --> CANManager : trigger CAN data
+CANManager --> CarSimulator : inputs
+CarSimulator --> CANManager : outputs
+CANManager --> CANHardware : hardware interface
+CANManager --> VirtualCAN : virtual interface
+CANManager --> LoggingSystem : log activities
