@@ -1,5 +1,3 @@
-Here's your **fully updated markdown** with correct relative links to all files, allowing either automatic integration (with Markdown processors supporting includes) or direct clickable links:
-
 # Architecture Documentation v0.1.4
 
 ## Table of Contents
