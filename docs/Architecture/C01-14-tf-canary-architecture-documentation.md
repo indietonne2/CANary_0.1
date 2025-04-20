@@ -111,7 +111,7 @@ Integrates GUI components, real-time data visualization, and user interactions.
 
 ## Diagrams
 
-### [c01-20] Context Diagram v0.1.1
+### [c01-15] Context Diagram v0.1.1
 
 ```plantuml
 @startuml C01-20_ContextDiagram
@@ -142,7 +142,7 @@ CANManager --> MainWindow : update GUI
 @enduml
 ```
 
-### [c01-21] Component Diagram v0.1.1
+### [c01-16] Component Diagram v0.1.1
 
 ```plantuml
 @startuml C01-21_ComponentDiagram
@@ -191,7 +191,7 @@ CANManager --> CarSimulator
 @enduml
 ```
 
-### [c01-22] Sequence Diagram: Initialization v0.1.1
+### [c01-17] Sequence Diagram: Initialization v0.1.1
 
 ```plantuml
 @startuml C01-22_InitSequence
@@ -218,10 +218,10 @@ SM -> MW : initialize GUI
 @enduml
 ```
 
-### [c01-23] Sequence Diagram: CAN Message Flow v0.1.1
+### [c01-20] Sequence Diagram: CAN Message Flow v0.1.1
 
 ```plantuml
-@startuml C01-23_CANFlow
+@startuml C01-20_CANFlow
 participant SM as ScenarioManager
 participant CMgr as CANManager
 participant VCI as VirtualCANInterface
