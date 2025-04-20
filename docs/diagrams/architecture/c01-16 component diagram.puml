@@ -1,0 +1,38 @@
+@startuml ComponentDiagram
+package "Core Setup" {
+  component PlatformDetector
+  component VenvSetup
+  component PixiEnvironment
+  component ConfigurationManager
+}
+package "Persistence" {
+  component SQLiteDB
+  component ScenarioLoader
+  component ScenarioManager
+}
+package "GUI" {
+  component MainWindow
+  component CANVisualizer
+}
+package "Interfaces" {
+  component CANInterfaceFactory
+  component VirtualCANInterface
+  component HardwareCANInterface
+}
+package "Simulation" {
+  component CANManager
+  component CarSimulator
+}
+
+PlatformDetector --> ConfigurationManager
+ConfigurationManager --> SQLiteDB
+ScenarioLoader --> SQLiteDB
+ScenarioManager --> ScenarioLoader
+MainWindow --> ScenarioManager
+MainWindow --> CANVisualizer
+CANInterfaceFactory --> VirtualCANInterface
+CANInterfaceFactory --> HardwareCANInterface
+CANManager --> CANInterfaceFactory
+CANManager --> ScenarioManager
+CANManager --> CarSimulator
+@enduml
