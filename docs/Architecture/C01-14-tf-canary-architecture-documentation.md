@@ -1,4 +1,4 @@
-# Architecture Documentation v0.1.1
+# Architecture Documentation v0.1.2
 
 ## Table of Contents
 
@@ -8,148 +8,161 @@
    - [PlatformDetector](#platformdetector)
    - [VenvSetup](#venvsetup)
    - [PixiEnvironment](#pixienvironment)
+   - [LoggingSystem](#loggingsystem)
+   - [CLI](#cli)
    - [ConfigurationManager](#configurationmanager)
    - [SQLiteDB](#sqlitedb)
    - [ScenarioLoader](#scenarioloader)
+   - [ScenarioValidator](#scenariovalidator)
    - [ScenarioManager](#scenariomanager)
-   - [MainWindow](#mainwindow)
-   - [Running Program](#running-program)
+   - [CarSimulator](#carsimulator)
    - [CANInterfaceFactory](#caninterfacefactory)
    - [VirtualCANInterface](#virtualcaninterface)
    - [HardwareCANInterface](#hardwarecaninterface)
    - [CANManager](#canmanager)
    - [CANVisualizer](#canvisualizer)
-   - [CarSimulator](#carsimulator)
+   - [MainWindow](#mainwindow)
 4. [Diagrams](#diagrams)
    - [Context Diagram](#context-diagram)
    - [Component Diagram](#component-diagram)
    - [Sequence Diagram: Initialization](#sequence-diagram-initialization)
    - [Sequence Diagram: CAN Message Flow](#sequence-diagram-can-message-flow)
-   - [Deployment Diagram](#deployment-diagram)
+   - [Architecture Diagram](#architecture-diagram)
 
 ---
 
 ## Introduction
 
-This document provides a comprehensive architecture overview for the TF-Canary project, outlining modules, their responsibilities, and interactions. It includes PlantUML diagrams for visual reference.
+This updated document provides a refined architecture overview for the TF-Canary project, detailing modules, their responsibilities, and interactions, emphasizing logging, testing, and mode-specific configurations. It includes updated PlantUML diagrams reflecting the current design.
 
 ## System Overview
 
-TF-Canary is a CAN-bus simulation framework with GUI support for scenario management, virtual/hardware CAN interfaces, and real-time visualization. The system is divided into four phases:
-
-- **Phase 1**: Environment & Core Setup
-- **Phase 2**: GUI Implementation
-- **Phase 3**: CAN Bus Interfaces
-- **Phase 4**: CAN Management & Simulation
+TF-Canary is a CAN-bus simulation platform designed with GUI and CLI support. The system integrates scenario management, virtual/hardware CAN interfaces, real-time visualization, and comprehensive testing and logging capabilities. It supports three operational modes: Workshop (Kiosk), Default, and User.
 
 ## Module Descriptions
 
 ### PlatformDetector
 
-Detects the underlying OS and hardware platform at startup, setting configuration flags.
+Detects OS and hardware at startup, setting appropriate configurations.
 
 ### VenvSetup
 
-Initializes a Python virtual environment for consistent dependency management.
+Creates a Python virtual environment to manage consistent dependencies.
 
 ### PixiEnvironment
 
-Configures Pixi for package and dependency management.
+Manages package dependencies, tailored to different hardware platforms.
+
+### LoggingSystem
+
+Provides centralized logging, error tracking, and persistent log handling.
+
+### CLI
+
+Offers command-line interaction for module testing and operation validation.
 
 ### ConfigurationManager
 
-Loads and applies configuration settings from files or environment variables.
+Manages application configurations from environment variables and files.
 
 ### SQLiteDB
 
-Defines schema and provides CRUD operations for persistent storage of scenarios and settings.
+Provides persistent storage with CRUD capabilities for scenarios and configurations.
 
 ### ScenarioLoader
 
-Fetches predefined scenarios from SQLiteDB.
+Loads predefined scenarios from the SQLite database.
+
+### ScenarioValidator
+
+Validates scenarios for data consistency and correctness.
 
 ### ScenarioManager
 
-Handles scenario lifecycle, selection, and state management.
-
-### MainWindow
-
-Primary GUI container integrating visualization components and user interactions.
-
-### Running Program
-
-Validates integration of core modules in a minimal working GUI application.
-
-### CANInterfaceFactory
-
-Factory for instantiating virtual or hardware CAN interfaces based on platform.
-
-### VirtualCANInterface
-
-Simulates CAN bus messages for testing without hardware.
-
-### HardwareCANInterface
-
-Interfaces with physical CAN hardware (Raspberry Pi hat or USB-CAN adapter).
-
-### CANManager
-
-Coordinates message flow between scenarios, interfaces, and the car simulator.
-
-### CANVisualizer
-
-Renders real-time CAN data in the GUI.
+Controls the lifecycle and management of scenarios.
 
 ### CarSimulator
 
-Emulates basic vehicle dynamics responding to CAN messages.
+Simulates vehicle dynamics and ECU behaviors in response to CAN messages.
+
+### CANInterfaceFactory
+
+Selects appropriate CAN interfaces based on detected hardware or virtual environment.
+
+### VirtualCANInterface
+
+Simulates CAN-bus interactions for testing purposes.
+
+### HardwareCANInterface
+
+Interfaces with physical CAN-bus hardware, including Raspberry Pi CAN shields and USB adapters.
+
+### CANManager
+
+Coordinates the data flow between scenarios, CAN interfaces, and car simulation.
+
+### CANVisualizer
+
+Visualizes real-time CAN-bus data streams within the GUI.
+
+### MainWindow
+
+Integrates GUI components, real-time data visualization, and user interactions.
 
 ## Diagrams
 
-### C01-15 Context Diagram v0.1.0
+### [c01-20] Context Diagram v0.1.1
 
 ```plantuml
-@startuml C01-15_ContextDiagram
+@startuml C01-20_ContextDiagram
 actor User
 node "TF-Canary Application" {
   component MainWindow
   component CANManager
   component ScenarioManager
   component CarSimulator
+  component CLI
+  component LoggingSystem
 }
 database "SQLiteDB"
 actor CANHardware
 actor VirtualCAN
 
-User --> MainWindow : start / interact
+User --> MainWindow : interact
+User --> CLI : execute commands
 MainWindow --> ScenarioManager : select scenario
 ScenarioManager --> SQLiteDB : load scenario
-ScenarioManager --> CANManager : trigger messages
-CANManager --> CarSimulator : send inputs
-CarSimulator --> CANManager : simulate outputs
-CANManager --> CANHardware : send to hardware
-CANManager --> VirtualCAN : send to virtual
-CANManager --> CANVisualizer : update GUI
+ScenarioManager --> CANManager : trigger CAN data
+CANManager --> CarSimulator : inputs
+CarSimulator --> CANManager : outputs
+CANManager --> CANHardware : hardware interface
+CANManager --> VirtualCAN : virtual interface
+CANManager --> LoggingSystem : log activities
+CANManager --> MainWindow : update GUI
 @enduml
 ```
 
-### C01-16 Component Diagram v0.1.0
+### [c01-21] Component Diagram v0.1.1
 
 ```plantuml
-@startuml C01-16_ComponentDiagram
+@startuml C01-21_ComponentDiagram
 package "Core Setup" {
   component PlatformDetector
   component VenvSetup
   component PixiEnvironment
-  component ConfigurationManager
+  component LoggingSystem
+  component CLI
 }
 package "Persistence" {
+  component ConfigurationManager
   component SQLiteDB
   component ScenarioLoader
-  component ScenarioManager
+  component ScenarioValidator
 }
-package "GUI" {
-  component MainWindow
+package "Simulation & Visualization" {
+  component ScenarioManager
+  component CarSimulator
+  component CANManager
   component CANVisualizer
 }
 package "Interfaces" {
@@ -157,17 +170,19 @@ package "Interfaces" {
   component VirtualCANInterface
   component HardwareCANInterface
 }
-package "Simulation" {
-  component CANManager
-  component CarSimulator
+package "GUI Layer" {
+  component MainWindow
 }
 
 PlatformDetector --> ConfigurationManager
 ConfigurationManager --> SQLiteDB
 ScenarioLoader --> SQLiteDB
-ScenarioManager --> ScenarioLoader
+ScenarioValidator --> ScenarioLoader
+ScenarioManager --> ScenarioValidator
 MainWindow --> ScenarioManager
 MainWindow --> CANVisualizer
+CLI --> all
+LoggingSystem --> all
 CANInterfaceFactory --> VirtualCANInterface
 CANInterfaceFactory --> HardwareCANInterface
 CANManager --> CANInterfaceFactory
@@ -176,67 +191,170 @@ CANManager --> CarSimulator
 @enduml
 ```
 
-### C01-17 Sequence Diagram: Initialization v0.1.0
+### [c01-22] Sequence Diagram: Initialization v0.1.1
 
 ```plantuml
-@startuml C01-17_InitSequence
+@startuml C01-22_InitSequence
 participant PD as PlatformDetector
 participant VS as VenvSetup
 participant PX as PixiEnvironment
+participant LS as LoggingSystem
 participant CM as ConfigurationManager
 participant DB as SQLiteDB
 participant SL as ScenarioLoader
+participant SV as ScenarioValidator
 participant SM as ScenarioManager
 participant MW as MainWindow
 
-PD -> VS : init venv
+PD -> VS : setup venv
 VS -> PX : configure Pixi
-PX -> CM : load configs
-CM -> DB : init schema
-DB -> SL : register scenarios
-SL -> SM : load default
+PX -> LS : initialize logging
+LS -> CM : load config
+CM -> DB : init database
+DB -> SL : load scenarios
+SL -> SV : validate scenarios
+SV -> SM : setup scenarios
 SM -> MW : initialize GUI
 @enduml
 ```
 
-### C01-18 Sequence Diagram: CAN Message Flow v0.1.0
+### [c01-23] Sequence Diagram: CAN Message Flow v0.1.1
 
 ```plantuml
-@startuml C01-18_CANFlow
+@startuml C01-23_CANFlow
 participant SM as ScenarioManager
 participant CMgr as CANManager
 participant VCI as VirtualCANInterface
 participant HCI as HardwareCANInterface
 participant CS as CarSimulator
 participant CV as CANVisualizer
+participant LS as LoggingSystem
 
 SM -> CMgr : start scenario
-CMgr -> CS : simulate step
-CS --> CMgr : data frame
-CMgr -> VCI : send frame (if virtual)
-CMgr -> HCI : send frame (if hardware)
-CMgr -> CV : update display
+CMgr -> CS : simulate inputs
+CS --> CMgr : generate output
+CMgr -> VCI : virtual send
+CMgr -> HCI : hardware send
+CMgr -> CV : update visualization
+CMgr -> LS : log CAN activity
 @enduml
 ```
 
-### C01-19 Deployment Diagram v0.1.0
+### [c01-19] Architecture Diagram v0.1.2
 
 ```plantuml
-@startuml C01-19_DeploymentDiagram
-node Host {
-  folder "venv/"
-  component "TF-Canary App"
-  database "SQLiteDB File"
-}
-node RaspberryPi {
-  component "CAN Hardware Hat"
-}
-node PC {
-  component "USB-CAN Adapter"
+@startuml
+skinparam backgroundColor #fdf6e3
+skinparam nodeStyle rectangle
+
+Title "[c01-19] TF-Canary Architecture Diagram v0.1.2 (Including Modes, Logging, and Testing)"
+
+package "Environment & Core Setup" {
+  node "1. PlatformDetector" as PD
+  node "2. VenvSetup" as VS
+  node "3. PixiEnvironment" as PE
+  node "4. LoggingSystem" as LS
+  node "5. CLI" as CLI
 }
 
-Host --> RaspberryPi : CAN Bus
-Host --> PC : USB-CAN
+package "Configuration & Data Persistence" {
+  node "6. ConfigurationManager" as CM
+  node "7. SQLiteDB" as DB
+  node "8. ScenarioLoader" as SL
+  node "9. ScenarioValidator" as SV
+}
+
+package "Scenario & Simulation Logic" {
+  node "10. ScenarioManager" as SM
+  node "11. CarSimulator" as CS
+}
+
+package "Testing Infrastructure" {
+  node "12. TestRunner & Pytest" as TR
+  node "13. Unit & Integration Tests" as UIT
+}
+
+package "CAN Interface & Hardware Abstraction" {
+  node "14. CANInterfaceFactory" as CIF
+  node "15. VirtualCANInterface" as VCI
+  node "16. HardwareCANInterface" as HCI
+  node "17. SelfTest" as ST
+}
+
+package "CAN Data Management & Visualization" {
+  node "18. CANManager" as CANM
+  node "19. CANMessageInterpreter" as CMI
+  node "20. CANVisualizer" as CV
+}
+
+package "GUI Layer & ECU Visualization" {
+  node "21. MainWindow" as MW
+  node "22. CANVisualizerWidget" as CVW
+  node "23. ECUOverlayManager" as EOM
+}
+
+package "Connectivity & Advanced Functions" {
+  node "24. BluetoothManager" as BM
+  node "25. SimulatorNetwork" as SN
+}
+
+package "Metrics, Users & Security" {
+  node "26. MetricsAggregator" as MA
+  node "27. UserManager" as UM
+  node "28. AccessControl" as AC
+}
+
+package "Error Handling, Documentation & Final Testing" {
+  node "29. ErrorManager" as EM
+  node "30. DocumentationGenerator" as DG
+  node "31. SystemTests" as SYST
+}
+
+package "Deployment & Packaging" {
+  node "32. PixiConfig & PackageArtifacts" as PA
+}
+
+package "Operational Modes" {
+  node "Workshop Mode (Kiosk)" as WM
+  node "Default Mode" as DM
+  node "User Mode" as USM
+}
+
+PD --> VS
+VS --> PE
+PE --> LS
+LS --> CLI
+CLI --> CM
+CM --> DB
+DB --> SL
+SL --> SV
+SV --> SM
+SM --> CS
+CS --> CANM
+CANM --> CIF
+CIF --> VCI
+CIF --> HCI
+HCI --> ST
+CANM --> CMI
+CMI --> CV
+CV --> CVW
+CVW --> MW
+MW --> EOM
+EOM --> BM
+BM --> SN
+SN --> MA
+MA --> UM
+UM --> AC
+AC --> EM
+EM --> DG
+DG --> SYST
+SYST --> PA
+
+WM --> MW
+DM --> MW
+USM --> MW
+
 @enduml
 ```
+
 
