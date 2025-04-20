@@ -106,10 +106,10 @@ Emulates basic vehicle dynamics responding to CAN messages.
 
 ## Diagrams
 
-### Context Diagram
+### C01-15 Context Diagram v0.1.0
 
 ```plantuml
-@startuml ContextDiagram
+@startuml C01-15_ContextDiagram
 actor User
 node "TF-Canary Application" {
   component MainWindow
@@ -133,10 +133,10 @@ CANManager --> CANVisualizer : update GUI
 @enduml
 ```
 
-### Component Diagram
+### C01-16 Component Diagram v0.1.0
 
 ```plantuml
-@startuml ComponentDiagram
+@startuml C01-16_ComponentDiagram
 package "Core Setup" {
   component PlatformDetector
   component VenvSetup
@@ -176,10 +176,10 @@ CANManager --> CarSimulator
 @enduml
 ```
 
-### Sequence Diagram: Initialization
+### C01-17 Sequence Diagram: Initialization v0.1.0
 
 ```plantuml
-@startuml InitSequence
+@startuml C01-17_InitSequence
 participant PD as PlatformDetector
 participant VS as VenvSetup
 participant PX as PixiEnvironment
@@ -199,10 +199,10 @@ SM -> MW : initialize GUI
 @enduml
 ```
 
-### Sequence Diagram: CAN Message Flow
+### C01-18 Sequence Diagram: CAN Message Flow v0.1.0
 
 ```plantuml
-@startuml CANFlow
+@startuml C01-18_CANFlow
 participant SM as ScenarioManager
 participant CMgr as CANManager
 participant VCI as VirtualCANInterface
@@ -219,10 +219,10 @@ CMgr -> CV : update display
 @enduml
 ```
 
-### Deployment Diagram
+### C01-19 Deployment Diagram v0.1.0
 
 ```plantuml
-@startuml DeploymentDiagram
+@startuml C01-19_DeploymentDiagram
 node Host {
   folder "venv/"
   component "TF-Canary App"
@@ -239,5 +239,4 @@ Host --> RaspberryPi : CAN Bus
 Host --> PC : USB-CAN
 @enduml
 ```
-
 
