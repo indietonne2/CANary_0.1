@@ -1,0 +1,22 @@
+@startuml ContextDiagram
+actor User
+node "c01-15 TF-Canary Application" {
+  component MainWindow
+  component CANManager
+  component ScenarioManager
+  component CarSimulator
+}
+database "SQLiteDB"
+actor CANHardware
+actor VirtualCAN
+
+User --> MainWindow : start / interact
+MainWindow --> ScenarioManager : select scenario
+ScenarioManager --> SQLiteDB : load scenario
+ScenarioManager --> CANManager : trigger messages
+CANManager --> CarSimulator : send inputs
+CarSimulator --> CANManager : simulate outputs
+CANManager --> CANHardware : send to hardware
+CANManager --> VirtualCAN : send to virtual
+CANManager --> CANVisualizer : update GUI
+@enduml
