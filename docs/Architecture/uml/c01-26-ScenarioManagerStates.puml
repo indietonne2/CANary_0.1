@@ -1,0 +1,10 @@
+@startuml ScenarioManagerStates
+[*] --> Idle
+Idle --> Loading : load scenario
+Loading --> Validating : load complete
+Validating --> Active : validation successful
+Active --> Completed : scenario end
+Completed --> Idle : reset
+Active --> Error : failure
+Error --> Idle : reset/error handled
+@enduml
