@@ -1,0 +1,22 @@
+@startuml C01-22_InitSequence
+participant PD as PlatformDetector
+participant VS as VenvSetup
+participant PX as PixiEnvironment
+participant LS as LoggingSystem
+participant CM as ConfigurationManager
+participant DB as SQLiteDB
+participant SL as ScenarioLoader
+participant SV as ScenarioValidator
+participant SM as ScenarioManager
+participant MW as MainWindow
+
+PD -> VS : setup venv
+VS -> PX : configure Pixi
+PX -> LS : initialize logging
+LS -> CM : load config
+CM -> DB : init database
+DB -> SL : load scenarios
+SL -> SV : validate scenarios
+SV -> SM : setup scenarios
+SM -> MW : initialize GUI
+@enduml
