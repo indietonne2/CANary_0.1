@@ -6,4 +6,4 @@ with support for GUI and CLI interfaces, virtual and hardware CAN
 interfaces, and scenario-based testing.
 """
 
-__version__ = "0.1.0"
+__version__ = "0.1.1"
