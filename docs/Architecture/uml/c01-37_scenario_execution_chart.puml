@@ -1,0 +1,19 @@
+flowchart TD
+  A[Start Application] --> B[User loads scenario file]
+  B --> C{Schema valid?}
+  C -- No --> D[Log Error & Abort]
+  C -- Yes --> E[Initialize Resources]
+  E --> F[Ready State]
+  F --> G{Start Command?}
+  G -- No --> F
+  G -- Yes --> H[Transition to RUNNING]
+  H --> I[Execute next step]
+  I --> J{Error?}
+  J -- Yes --> K[Transition to ERROR]
+  J -- No --> L{Completed all steps?}
+  L -- No --> I
+  L -- Yes --> M[Transition to COMPLETED]
+  K --> N[Cleanup]
+  M --> N
+  N --> F
+
