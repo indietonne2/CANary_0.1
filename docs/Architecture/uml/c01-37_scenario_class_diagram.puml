@@ -1,0 +1,58 @@
+classDiagram
+  class ScenarioManager {
+    <<singleton>>
+    - config: Config
+    - scenarios: Map<String, Scenario>
+    - current: Scenario
+    - state: ScenarioState
+    - logger: Logger
+    + load(path: String): void
+    + start(id: String): void
+    + pause(): void
+    + resume(): void
+    + stop(): void
+    + reset(): void
+    + getStatus(): ScenarioState
+    + addListener(listener: EventListener): void
+  }
+
+  class Scenario {
+    - id: String
+    - steps: List<ScenarioStep>
+    - metadata: Map<String,Any>
+    + validate(): boolean
+    + getNextStep(): ScenarioStep
+  }
+
+  class ScenarioLoader {
+    + parse(path: String): Scenario
+  }
+
+  class Logger {
+    + info(msg: String): void
+    + debug(msg: String): void
+    + error(msg: String): void
+    + setLevel(level: LogLevel): void
+  }
+
+  class EventListener {
+    <<interface>>
+    + onEvent(event: ScenarioEvent): void
+  }
+
+  class ScenarioState {
+    <<enumeration>>
+    Idle
+    Ready
+    Running
+    Paused
+    Completed
+    Error
+  }
+
+  ScenarioManager --> ScenarioLoader : uses
+  ScenarioManager --> Scenario : manages
+  ScenarioManager --> Logger : logs
+  ScenarioManager --> EventListener : notifies >
+  Scenario --> ScenarioStep : contains
+
