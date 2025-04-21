@@ -77,23 +77,23 @@ Click on the module name for detailed documentation:
 
 | Module Name            | Documentation |
 |------------------------|---------------|
-| PlatformDetector       | [C01-27](docs/descriptions/C01-27-tf-canary-plattformDetector.md) |
-| VenvSetup              | [C01-28](docs/descriptions/C01-28-tf-canary-venv-setup.md) |
-| PixiEnvironment        | [C01-29](docs/descriptions/C01-29-tf-canary-pixi-environment.md) |
-| LoggingSystem          | [C01-30](docs/descriptions/C01-30-tf-canary-LoggingSystem.md) |
-| CLI                    | [C01-31](docs/descriptions/C01-31-tf-canary-cli.md) |
-| ConfigurationManager   | [C01-32](docs/descriptions/C01-32-tf-canary-ConfigurationManager.md) |
-| SQLiteDB               | [C01-33](docs/descriptions/C01-33-tf-canary-SQLiteDBr.md) |
-| ScenarioLoader         | [C01-34](docs/descriptions/C01-34-tf-canary-ScenarioLoader.md) |
-| ScenarioValidator      | [C01-35](docs/descriptions/C01-35-tf-canary-ScenarioValidator.md) |
-| ScenarioManager        | [C01-36](docs/descriptions/C01-36-tf-canary-ScenarioManager.md) |
-| CarSimulator           | [C01-39](docs/descriptions/c01-39_CarSimulator.md) |
-| CANInterfaceFactory    | [C01-40](docs/descriptions/c01-40_CANInterfaceFactoryr.md) |
-| VirtualCANInterface    | [C01-41](docs/descriptions/c01-41_VirtualCANInterface.md) |
-| HardwareCANInterface   | [C01-42](docs/descriptions/c01-42_HardwareCANInterface.md) |
-| CANManager             | [C01-43](docs/descriptions/c01-43_CANManager.md) |
-| CANVisualizer          | [C01-44](docs/descriptions/C01-44_CANVisualizer.md) |
-| MainWindow             | [C01-45](docs/descriptions/c01-45_MainWindow.md) |
+| PlatformDetector       | [C01-27](C01-27-tf-canary-plattformDetector.md) |
+| VenvSetup              | [C01-28](C01-28-tf-canary-venv-setup.md) |
+| PixiEnvironment        | [C01-29](C01-29-tf-canary-pixi-environment.md) |
+| LoggingSystem          | [C01-30](C01-30-tf-canary-LoggingSystem.md) |
+| CLI                    | [C01-31](C01-31-tf-canary-cli.md) |
+| ConfigurationManager   | [C01-32](C01-32-tf-canary-ConfigurationManager.md) |
+| SQLiteDB               | [C01-33](C01-33-tf-canary-SQLiteDBr.md) |
+| ScenarioLoader         | [C01-34](C01-34-tf-canary-ScenarioLoader.md) |
+| ScenarioValidator      | [C01-35](C01-35-tf-canary-ScenarioValidator.md) |
+| ScenarioManager        | [C01-36](C01-36-tf-canary-ScenarioManager.md) |
+| CarSimulator           | [C01-39](c01-39_CarSimulator.md) |
+| CANInterfaceFactory    | [C01-40](c01-40_CANInterfaceFactoryr.md) |
+| VirtualCANInterface    | [C01-41](c01-41_VirtualCANInterface.md) |
+| HardwareCANInterface   | [C01-42](c01-42_HardwareCANInterface.md) |
+| CANManager             | [C01-43](c01-43_CANManager.md) |
+| CANVisualizer          | [C01-44](C01-44_CANVisualizer.md) |
+| MainWindow             | [C01-45](c01-45_MainWindow.md) |
 
 ---
 
@@ -118,13 +118,13 @@ Click on the module name for detailed documentation:
 
 Click to view diagrams in detail:
 
-- [Dependency Development Chart](docs/diagrams/architecture/c01-13_Dependency_Development_Chart.puml)
-- [Context Diagram](docs/diagrams/architecture/c01-15%20context%20diagram.puml)
-- [Component Diagram](docs/diagrams/architecture/c01-16%20component%20diagram.puml)
-- [Sequence Diagram: Initialization](docs/diagrams/architecture/c01-17%20sequenz%20initialisation.puml)
-- [Deployment Diagram](docs/diagrams/architecture/c01-18%20deployment%20diagram.puml)
-- [Architecture Diagram](docs/diagrams/architecture/c01-19_architecture_diagram_puml)
-- [Sequence Diagram: CAN Message Flow](docs/diagrams/architecture/c01-20_CAN_Message_Flow.puml)
+- [Dependency Development Chart](uml/c01-13_Dependency_Development_Chart.puml)
+- [Context Diagram](uml/c01-15%20context%20diagram.puml)
+- [Component Diagram](uml/c01-16%20component%20diagram.puml)
+- [Sequence Diagram: Initialization](uml/c01-17%20sequenz%20initialisation.puml)
+- [Deployment Diagram](uml/c01-18%20deployment%20diagram.puml)
+- [Architecture Diagram](uml/c01-19_architecture_diagram_puml)
+- [Sequence Diagram: CAN Message Flow](uml/c01-20_CAN_Message_Flow.puml)
 
 ---
 
