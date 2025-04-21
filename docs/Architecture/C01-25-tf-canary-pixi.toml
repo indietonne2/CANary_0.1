@@ -1,4 +1,0 @@
-[dependencies]
-python = ">=3.11,<3.13"
-canlib = "^1.2.3"
-
