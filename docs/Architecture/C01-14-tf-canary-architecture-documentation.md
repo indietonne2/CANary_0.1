@@ -42,18 +42,28 @@
 ---
 
 ## 1. Introduction
-
-This architecture documentation provides a comprehensive overview of the TF-Canary project, detailing system architecture, module interactions, data models, cross-cutting concerns, and state diagrams. It emphasizes detailed interface definitions, logging, testing, and operational modes.
+TF-Canary is a Python Developed CAN-Bus Simulator firstly developed vor Raspberry PI and Web. It should give IT-Specialists, Automotive Enthusiasts and Car-Hacker a tool to understand how a car is communicating internally. This Document is intended for Developer or People who want to get a deep understanding. It is not intended as a replacement for the End-User-Documentation.
+This architecture documentation provides the  overview of the Canary project, detailing system architecture, module interactions, data models, cross-cutting concerns, and state diagrams. It emphasizes detailed interface definitions, logging, testing, and operational modes.
 
 ## 2. System Overview
 
-TF-Canary is a robust CAN-bus simulation platform supporting GUI and CLI. It integrates scenario management, virtual/hardware CAN interfaces, real-time visualization, comprehensive testing, and centralized logging, with three operational modes: Workshop (Kiosk), Default, and User.
+TF-Canary is a CAN-bus simulation platform supporting GUI and CLI. It integrates different preproduced scenarios and a scenario management, virtual/hardware CAN interfaces, real-time visualization, comprehensive testing, and centralized logging, with three operational modes: Workshop (Kiosk), Default, and User.
 
 [System Overview Diagram](docs/diagrams/architecture/system_overview.puml)
 
 ---
+### 2.1 Description of the Modes
+There are three Modes predefined:
+
+* Default -> The Default Setting, if there is no saved Configuration
+* User -> If the User creats his own Setting via the Menu, by default at the next start this will be selected
+* Workshop -> Like a Kiosk-Mode. None of the Settings is saved amd on next Start everything is on default. If the User creates a Profile in this Mode, it is NOT selected on the next start. If the User wants to use his profile he explicitly has to take care of selecting his Profile (Changing to "User" -> selecting his Profile). 
+
+
 
 ## 3. Architecture Documentation
+(This Document)
+The Architecture Documentation is the framework for the Documentation
 
 - [Architecture Documentation (C01-14-tf-canary-architecture-documentation.md)](docs/descriptions/C01-14-tf-canary-architecture-documentation.md)
 
@@ -178,7 +188,40 @@ Click to view diagrams in detail:
 ---
 
 ## UI Mockup
-
 ![Mockup UI](graphics/Mockup UI 02.png)
+Tbe UI Mockup describes the proposed final stage of the GUI.
+### Widgets from UI-Mockup
+Now follows a short description of the components of the GUI
+#### Scenario Selector
+The Scenario Selector provides a Single Select Box to select the Scenario the User wants to use. 
+#### Car Mockup with Overlay
+The Car Mockup shows the Schematics of our simulated car. If a Scenario is Running it would show the involved ECU highlighted
+#### User/Profile Icon
+The User/Profile Icon hides the Menu and shows what Mode is selected.
+### Menu
+#### Log
+Shows the Realtime Log of the Application -> good for Debugging
+#### Settings
+The Settings Tab allows
+* Save the profile
+* Selects the Language
+* Allows to save the Application
+### Logger Button 
+- Enable/Disable
+- CAN-Bus Data of the experiment should be saved or dropped
+### Bluetooth Button 
+- Enable/Disable
+- If multiple Canarys are used, they communicate via Bluetooth 
+### Translation Button 
+- Enable/Disable
+- If enabled it would shortcut to the profile and allow to change the screen language
+### Mode Display 
+- Displays the current Mode
+- Shortcuts to the Mode Selection
+### Logger Window 
+- Shows the Can-Bus Data in a table
+- can be configured via the Settings Menu (But not in Workshop Mode)
+### Line chart
+- Shows a visual representation of the CAN-Bus Data Flow
 
 
