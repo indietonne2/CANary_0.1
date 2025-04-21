@@ -1,4 +1,4 @@
-# Architecture Documentation v0.1.4
+# Architecture Description v015
 
 ## Table of Contents
 
@@ -22,7 +22,7 @@
    - 5.13 [VirtualCANInterface](docs/descriptions/c01-41_VirtualCANInterface.md)  
    - 5.14 [HardwareCANInterface](docs/descriptions/c01-42_HardwareCANInterface.md)  
    - 5.15 [CANManager](docs/descriptions/c01-43_CANManager.md)  
-   - 5.16 [CANVisualizer](docs/descriptions/c01-44_CANVisualizer.md)  
+   - 5.16 [CANVisualizer](docs/descriptions/C01-44_CANVisualizer.md)  
    - 5.17 [MainWindow](docs/descriptions/c01-45_MainWindow.md)  
 6. [Data Model Documentation](docs/descriptions/C01-22-tf-canary-data-model-documentation.md)  
 7. [Cross-Cutting Concerns](docs/descriptions/C01-23-tf-canary-Cross-Cutting-Concerns.md)  
@@ -31,13 +31,13 @@
    - 9.1 [Makefile](docs/descriptions/C01-24-tf-canary-makefile.md)  
    - 9.2 [Pixi.toml](docs/descriptions/C01-25-tf-canary-pixi.toml)  
 10. [Diagrams](#diagrams)  
-    - [Dependency Development Chart](docs/diagrams/architecture/c01-13_Dependency_Development_Chart.puml)
-    - [Context Diagram](docs/diagrams/architecture/c01-15%20context%20diagram.puml)
-    - [Component Diagram](docs/diagrams/architecture/c01-16%20component%20diagram.puml)
-    - [Sequence Diagram: Initialization](docs/diagrams/architecture/c01-17%20sequenz%20initialisation.puml)
-    - [Deployment Diagram](docs/diagrams/architecture/c01-18%20deployment%20diagram.puml)
-    - [Architecture Diagram](docs/diagrams/architecture/c01-19_architecture_diagram_puml)
-    - [Sequence Diagram: CAN Message Flow](docs/diagrams/architecture/c01-20_CAN_Message_Flow.puml)
+    - [Dependency Development Chart](docs/diagrams/architecture/c01-13_Dependency_Development_Chart.puml)  
+    - [Context Diagram](docs/diagrams/architecture/c01-15%20context%20diagram.puml)  
+    - [Component Diagram](docs/diagrams/architecture/c01-16%20component%20diagram.puml)  
+    - [Sequence Diagram: Initialization](docs/diagrams/architecture/c01-17%20sequenz%20initialisation.puml)  
+    - [Deployment Diagram](docs/diagrams/architecture/c01-18%20deployment%20diagram.puml)  
+    - [Architecture Diagram](docs/diagrams/architecture/c01-19_architecture_diagram_puml)  
+    - [Sequence Diagram: CAN Message Flow](docs/diagrams/architecture/c01-20_CAN_Message_Flow.puml)  
 
 ---
 
@@ -82,7 +82,7 @@ Click on the module name for detailed documentation:
 | VirtualCANInterface    | [C01-41](docs/descriptions/c01-41_VirtualCANInterface.md) |
 | HardwareCANInterface   | [C01-42](docs/descriptions/c01-42_HardwareCANInterface.md) |
 | CANManager             | [C01-43](docs/descriptions/c01-43_CANManager.md) |
-| CANVisualizer          | [C01-44](docs/descriptions/c01-44_CANVisualizer.md) |
+| CANVisualizer          | [C01-44](docs/descriptions/C01-44_CANVisualizer.md) |
 | MainWindow             | [C01-45](docs/descriptions/c01-45_MainWindow.md) |
 
 ---
@@ -117,4 +117,68 @@ Click to view diagrams in detail:
 - [Sequence Diagram: CAN Message Flow](docs/diagrams/architecture/c01-20_CAN_Message_Flow.puml)
 
 ---
+
+## UML Diagrams
+
+### Dependency Development Chart
+```plantuml
+!include \"uml/c01-13_Dependency_Development_Chart.puml\"
+```
+
+### Context Diagram
+```plantuml
+!include \"uml/c01-15 context diagram.puml\"
+```
+
+### Component Diagram
+```plantuml
+!include \"uml/c01-16 component diagram.puml\"
+```
+
+### Sequence Initialization
+```plantuml
+!include \"uml/c01-17 sequenz initialisation.puml\"
+```
+
+### Deployment Diagram
+```plantuml
+!include \"uml/c01-18 deployment diagram.puml\"
+```
+
+### Architecture Diagram
+```plantuml
+!include \"uml/c01-19_architecture_diagram_puml\"
+```
+
+### CAN Message Flow
+```plantuml
+!include \"uml/c01-20_CAN_Message_Flow.puml\"
+```
+
+### Scenario Manager States
+```plantuml
+!include \"uml/c01-26-ScenarioManagerStates.puml\"
+```
+
+### Scenario Class Diagram
+```plantuml
+!include \"uml/c01-37_scenario_class_diagram.puml\"
+```
+
+### Scenario Execution Chart
+```plantuml
+!include \"uml/c01-37_scenario_execution_chart.puml\"
+```
+
+### System Overview
+```plantuml
+!include \"uml/system_overview.puml\"
+```
+
+---
+
+## UI Mockup
+
+![Mockup UI](graphics/Mockup UI 02.png)
+
 
