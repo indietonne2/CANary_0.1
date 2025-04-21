@@ -5,4 +5,9 @@ This package provides the CLI entry points and commands for interacting
 with the simulator from the terminal.
 """
 
-from .cli import app, main
+# Import key modules to make them available at package level
+try:
+    from .cli import app, main
+except ImportError:
+    # Handle situation where implementation files might not exist yet
+    pass
