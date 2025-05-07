@@ -1,0 +1,8 @@
+{
+  "interface": "vcan0",
+  "bitrate": 500000,
+  "virtual": true,
+  "headless": false,
+  "scenario": "default",
+  "log_level": "INFO"
+}
