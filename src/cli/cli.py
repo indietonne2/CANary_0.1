@@ -142,8 +142,8 @@ def init_command(
     
     console.print("[bold green]✓[/bold green] canCANary environment initialized successfully!")
     
-    # Return instructions
-console.print(
+    # Return instructions only if initialization was successful
+    console.print(
         Panel.fit(
             "[bold]Next steps:[/bold]\n\n"
             "1. Configure your CAN interface:\n"
