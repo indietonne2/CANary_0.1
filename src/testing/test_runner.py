@@ -73,9 +73,11 @@ class TestRunner:
             test_directory (str): The root directory where tests are located.
             log_level (int): The logging level for the TestRunner's logger.
         """
-        self.test_directory = test_directory
+        # Convert to absolute path at initialization
+        self.test_directory = os.path.abspath(test_directory)
         self.logger = logging.getLogger(f"{__name__}.TestRunner")
         self.logger.setLevel(log_level)
+        self.logger.info(f"TestRunner initialized. Target test directory: {self.test_directory}") # Log the actual path
         # Ensure the logger has a handler if not configured globally
         if not self.logger.hasHandlers():
             handler = logging.StreamHandler(sys.stdout)
