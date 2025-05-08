@@ -209,7 +209,7 @@ class CANaryStarter:
         if not command:
             command = "run"
 
-        cli_args = ["python", str(self.project_root / "canary_startup.py"), command]
+        cli_args = ["python", str(self.project_root / "canary_startup.py"), f"--{command}"]
 
         if command == "run":
             # Add scenario parameter
