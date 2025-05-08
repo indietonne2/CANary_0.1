@@ -4,6 +4,32 @@ Author: CANary Development Team
 Version: 0.1.0
 Filename: canary_startup.py
 Pathname: ./canary_startup.py
+Description:
+CANary Starter Script
+This script initializes and runs the CANary CAN-Bus Simulator.
+It handles environment setup, dependency installation via Pixi,
+CAN interface configuration, and application startup.
+"""
+
+"""
+Author: CANary Development Team
+Version: 0.1.0
+Filename: canary_startup.py
+Pathname: ./canary_startup.py
+Description:
+CANary Starter Script
+This script initializes and runs the CANary CAN-Bus Simulator.
+It handles environment setup, dependency installation via Pixi,
+CAN interface configuration, and application startup.
+"""
+
+"""
+Author: CANary Development Team
+Version: 0.1.0
+Filename: canary_startup.py
+Pathname: ./canary_startup.py
+Description:
+CANary Starter Script
 
 This script initializes and runs the CANary CAN-Bus Simulator.
 It handles environment setup, dependency installation via Pixi,
@@ -182,9 +208,9 @@ class CANaryStarter:
         
         if not command:
             command = "run"
-            
-        cli_args = ["python", "-m", "canary.cli", command]
-        
+
+        cli_args = ["python", str(self.project_root / "canary_startup.py"), command]
+
         if command == "run":
             # Add scenario parameter
             cli_args.extend(["--scenario", self.config["scenario"]])
@@ -210,8 +236,8 @@ class CANaryStarter:
         print(f"Running: {' '.join(cli_args)}")
         
         # Run the command using Pixi to ensure the environment is activated
-        pixi_args = ["run", "--"] + cli_args
-        
+        pixi_args = ["--"] + cli_args
+
         return self.run_pixi_command("run", pixi_args)
 
     def interactive_menu(self):
