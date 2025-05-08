@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 Author: CANary Development Team
-Version: 0.1.0
+Version: 0.1.2
 Filename: canary_startup.py
 Pathname: ./canary_startup.py
 Description:
@@ -45,6 +45,37 @@ import shutil
 from pathlib import Path
 import json
 import time
+import logging
+# Assuming test_runner.py is in src/testing/ relative to project root
+# and PYTHONPATH is set up accordingly or canary_startup.py is in a place where it can import it.
+# For example, if your project structure is:
+# project_root/
+#  src/
+#    testing/
+#      test_runner.py
+#    canary_startup.py  <-- if it's here or similar, or PYTHONPATH handles it
+
+# Adjust the import path based on your actual project structure and how Python modules are resolved.
+# If canary_startup.py is at the root, and src is in PYTHONPATH:
+# from src.testing.test_runner import TestRunner, logger as test_runner_logger
+# If canary_startup.py is inside src:
+from testing.test_runner import TestRunner #, logger as test_runner_logger # Assuming it's in the same package level
+
+# Configure logging for the canary startup process if not already done
+# This logger would capture the specific self-test output if configured
+logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+canary_logger = logging.getLogger("canary_startup")
+# Configure the dedicated logger for self-test results if you want separate handling
+# (test_runner.py already tries to get/create a 'canary_startup_self_test' logger)
+# You might want to add specific handlers for it here.
+# Example:
+# self_test_dedicated_logger = logging.getLogger("canary_startup_self_test")
+# file_handler = logging.FileHandler("canary_self_test_results.log")
+# formatter = logging.Formatter('CANARY_SELF_TEST - %(asctime)s - %(levelname)s - %(message)s')
+# file_handler.setFormatter(formatter)
+# self_test_dedicated_logger.addHandler(file_handler)
+# self_test_dedicated_logger.setLevel(logging.INFO)
+# self_test_dedicated_logger.propagate = False # If you don't want it to go to root logger too
 
 
 class CANaryStarter:
@@ -364,5 +395,45 @@ def main():
         starter.interactive_menu()
 
 
+def main_startup_procedure():
+    canary_logger.info("Canary startup sequence initiated.")
+
+    # Initialize the TestRunner
+    # The test_directory for the runner might be different from where the self-test runs.
+    # The self-test creates its own temporary test file.
+    # Provide the actual path to your project's tests if you plan to use this runner instance later.
+    runner = TestRunner(test_directory="path/to/project/tests") 
+
+    canary_logger.info("Performing TestRunner self-test...")
+    # Here, we call run_self_test and pass True for invoked_by_canary_startup
+    # This ensures the specific logging within test_runner.py for this scenario is triggered.
+    self_test_ok = runner.run_self_test(invoked_by_canary_startup=True)
+
+    if self_test_ok:
+        canary_logger.info("TestRunner self-test PASSED. Proceeding with startup.")
+        # ... other startup tasks ...
+        # For example, run actual smoke tests if the self-test passed
+        # canary_logger.info("Running smoke tests...")
+        # smoke_test_summary = runner.run_tests(scope=TestScope.SMOKE) # Assuming TestScope is also imported
+        # if smoke_test_summary.failed == 0 and smoke_test_summary.errors == 0:
+        #     canary_logger.info("Smoke tests PASSED.")
+        # else:
+        #     canary_logger.error("Smoke tests FAILED. Aborting full startup.")
+        #     return False # Indicate startup failure
+    else:
+        canary_logger.error("TestRunner self-test FAILED. This may indicate issues with the testing environment or pytest setup.")
+        canary_logger.error("Aborting startup sequence. Check 'canary_startup_self_test' logs or console output for details from test_runner.")
+        # Handle critical failure, e.g., exit or prevent full application start
+        return False # Indicate startup failure
+
+    canary_logger.info("Canary startup sequence completed successfully.")
+    return True
+
+
 if __name__ == "__main__":
-    main()
+    success = main_startup_procedure()
+    if not success:
+        # Optionally, exit with a specific code if startup failed
+        # import sys
+        # sys.exit(1)
+        pass
