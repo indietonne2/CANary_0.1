@@ -1,15 +1,18 @@
 #!/usr/bin/env python3
 """
 Author: CANary Development Team
-Version: 0.1.2
+Version: 0.1.3
 Filename: canary_startup.py
 Pathname: ./canary_startup.py
 Description:
-CANary Starter Script
-This script initializes and runs the CANary CAN-Bus Simulator.
-It handles environment setup, dependency installation via Pixi,
-CAN interface configuration, and application startup.
+canCANary CAN-Bus Simulator
+
+This package provides a comprehensive CAN-Bus simulation platform
+with support for GUI and CLI interfaces, virtual and hardware CAN
+interfaces, and scenario-based testing.
 """
+
+__version__ = "0.1.1" # Assuming __version__ might be managed separately or in sync
 
 """
 Author: CANary Development Team
@@ -30,7 +33,6 @@ Filename: canary_startup.py
 Pathname: ./canary_startup.py
 Description:
 CANary Starter Script
-
 This script initializes and runs the CANary CAN-Bus Simulator.
 It handles environment setup, dependency installation via Pixi,
 CAN interface configuration, and application startup.
@@ -59,7 +61,7 @@ import logging
 # If canary_startup.py is at the root, and src is in PYTHONPATH:
 # from src.testing.test_runner import TestRunner, logger as test_runner_logger
 # If canary_startup.py is inside src:
-from testing.test_runner import TestRunner #, logger as test_runner_logger # Assuming it's in the same package level
+from src.testing.test_runner import TestRunner, TestScope
 
 # Configure logging for the canary startup process if not already done
 # This logger would capture the specific self-test output if configured
