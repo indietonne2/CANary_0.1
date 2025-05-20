@@ -7,7 +7,7 @@
 3. [Architecture Documentation](docs/descriptions/C01-14-tf-canary-architecture-documentation.md)  
 4. [Interface Definitions](docs/descriptions/C01-21-tf-canary-interface-definition.md)  
 5. [Module Descriptions](#module-descriptions)  
-   - 5.1 [PlatformDetector](docs/descriptions/C01-27-tf-canary-plattformDetector.md)  
+   - 5.1 [PlatformDetector](docs/descriptions/C01-27-tf-canary-platformDetector.md)  
    - 5.2 [VenvSetup](docs/descriptions/C01-28-tf-canary-venv-setup.md)  
    - 5.3 [PixiEnvironment](docs/descriptions/C01-29-tf-canary-pixi-environment.md)  
    - 5.4 [LoggingSystem](docs/descriptions/C01-30-tf-canary-LoggingSystem.md)  
@@ -77,7 +77,7 @@ Click on the module name for detailed documentation:
 
 | Module Name            | Documentation |
 |------------------------|---------------|
-| PlatformDetector       | [C01-27](C01-27-tf-canary-plattformDetector.md) |
+| PlatformDetector       | [C01-27](C01-27-tf-canary-platformDetector.md) |
 | VenvSetup              | [C01-28](C01-28-tf-canary-venv-setup.md) |
 | PixiEnvironment        | [C01-29](C01-29-tf-canary-pixi-environment.md) |
 | LoggingSystem          | [C01-30](C01-30-tf-canary-LoggingSystem.md) |
