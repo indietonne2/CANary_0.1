@@ -181,7 +181,7 @@ class TestRunner:
                     try:
                         # Look for patterns like "collected 5 items"
                         import re
-                        collected_match = re.search(r"collected (\d+) item", process.stdout)
+                        collected_match = re.search(r"collected (\d+) items?", process.stdout)
                         passed_match = re.search(r"(\d+) passed", process.stdout)
                         skipped_match = re.search(r"(\d+) skipped", process.stdout)
 
